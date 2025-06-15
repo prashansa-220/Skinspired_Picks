@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Body Care 🛁</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive;
+      background: linear-gradient(to right, #ffd6e8, #ffeaf6);
+      color: #d63384;
+      padding: 40px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #ff69b4;
+    }
+
+    .question {
+      margin: 20px 0 10px;
+      font-size: 18px;
+    }
+
+    .options {
+      margin-left: 20px;
+    }
+
+    .options label {
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    input[type="radio"] {
+      transform: scale(1.3);
+      margin-right: 10px;
+    }
+
+    #result {
+      margin-top: 30px;
+      padding: 20px;
+      background: #fff0f5;
+      border-radius: 10px;
+      font-size: 18px;
+      color: #c2185b;
+    }
+
+    .button-group {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .button-group button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #ff69b4;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin: 5px;
+    }
+
+    .button-group button:nth-child(2) {
+      background-color: #f06292;
+    }
+
+    .button-group button:nth-child(3) {
+      background-color: #ec407a;
+    }
+  </style>
+</head>
+<body>
+  <h2>🛁 Body Care Questions</h2>
+
+  <form id="bodyForm">
+    <div class="question">1. How does your body skin feel after a shower?</div>
+    <div class="options">
+      <label><input type="radio" name="feel" value="Tight and dry"> Tight and dry</label>
+      <label><input type="radio" name="feel" value="Normal"> Normal</label>
+      <label><input type="radio" name="feel" value="Oily or sticky"> Oily or sticky</label>
+      <label><input type="radio" name="feel" value="Itchy or irritated"> Itchy or irritated</label>
+    </div>
+
+    <div class="question">2. What’s your main body skin concern?</div>
+    <div class="options">
+      <label><input type="radio" name="concern" value="Bacne (body acne)"> Bacne (body acne)</label>
+      <label><input type="radio" name="concern" value="Body tan"> Body tan</label>
+      <label><input type="radio" name="concern" value="Keratosis pilaris"> Keratosis pilaris</label>
+      <label><input type="radio" name="concern" value="None"> None</label>
+    </div>
+
+    <div class="question">3. How often do you moisturize your body?</div>
+    <div class="options">
+      <label><input type="radio" name="moisturize" value="Daily"> Daily</label>
+      <label><input type="radio" name="moisturize" value="A few times a week"> A few times a week</label>
+      <label><input type="radio" name="moisturize" value="Rarely"> Rarely</label>
+      <label><input type="radio" name="moisturize" value="Never"> Never</label>
+    </div>
+
+    <div class="question">4. Do you use sunscreen on body parts like arms/legs?</div>
+    <div class="options">
+      <label><input type="radio" name="sunscreen" value="Always"> Always</label>
+      <label><input type="radio" name="sunscreen" value="Sometimes"> Sometimes</label>
+      <label><input type="radio" name="sunscreen" value="Rarely"> Rarely</label>
+      <label><input type="radio" name="sunscreen" value="Never"> Never</label>
+    </div>
+
+    <div class="button-group">
+      <button type="button" onclick="generateBodyResult()">Result</button>
+      <button type="button" onclick="window.location.href='bodycare_recommendations.html'">View Recommendations</button>
+      <button type="button" onclick="window.location.href='bodycare_products.html'">Suggested Products</button>
+    </div>
+  </form>
+
+  <div id="result"></div>
+
+  <script>
+    function generateBodyResult() {
+      const form = document.forms['bodyForm'];
+      const feel = form['feel'].value;
+      const concern = form['concern'].value;
+
+      let resultText = `<strong>Skin Feel:</strong> ${feel}<br><strong>Concern:</strong> ${concern}<br><br>`;
+
+      resultText += "<strong>Tip:</strong> ";
+      if (feel === "Tight and dry") {
+        resultText += "Use hydrating body lotions with shea butter or glycerin after every shower.";
+      } else if (feel === "Oily or sticky") {
+        resultText += "Try lightweight, non-comedogenic moisturizers and take cool showers.";
+      } else if (feel === "Itchy or irritated") {
+        resultText += "Use soothing products with aloe vera and avoid hot water showers.";
+      } else {
+        resultText += "Maintain skin balance with gentle cleansers and regular moisturization.";
+      }
+
+      document.getElementById("result").innerHTML = resultText;
+    }
+  </script>
+</body>
+</html>

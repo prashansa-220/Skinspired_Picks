@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Select Your Gender</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: linear-gradient(to right, #ffd6e8, #ffeaf6);
+      display: flex;
+      height: 100vh;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+    }
+
+    .form-container {
+      background: #fff0f6;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(255, 105, 180, 0.3);
+      text-align: center;
+      border: 2px dashed #ff69b4;
+      max-width: 900px;
+      width: 90%;
+    }
+
+    h2 {
+      color: #ff69b4;
+      margin-bottom: 30px;
+    }
+
+    .button-group {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .gender-button {
+      height: 55px;
+      width: 220px;
+      background: #4f80ff;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 20px;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .gender-button:hover {
+      background: #3666b2;
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 600px) {
+      .gender-button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+    <h2>Select Your Gender</h2>
+    <div class="button-group">
+      <button class="gender-button" onclick="redirect()">👨 Male</button>
+      <button class="gender-button" onclick="redirect()">👩 Female</button>
+      <button class="gender-button" onclick="redirect()">🌈 Other</button>
+    </div>
+  </div>
+
+  <script>
+    function redirect() {
+      window.location.href = "category.html";
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Skincare Info Form </title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: linear-gradient(to right, #ffd6e8, #ffeaf6);
+      display: flex;
+      height: 100vh;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+    }
+
+    .form-container {
+      background: #fff0f6;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(255, 105, 180, 0.3);
+      width: 320px;
+      text-align: center;
+      border: 2px dashed #ff69b4;
+    }
+
+    .form-container h2 {
+      color: #ff69b4;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin: 10px 0 5px;
+      color: #d63384;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 2px solid #4f80ff;
+      border-radius: 10px;
+      background-color: #f0f8ff;
+      font-size: 14px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background: #4f80ff;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background 0.3s ease;
+      width: 100%;
+    }
+
+    button:hover {
+      background: #3666b2;
+    }
+
+    #message {
+      margin-top: 15px;
+      color: #cc0077;
+      font-weight: bold;
+    }
+
+    .stickers {
+      font-size: 26px;
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-container" role="form" aria-label="User Information Form">
+    <div class="stickers">🧴💖✨🛁🌸</div>
+    <h2>Please Enter Your Details</h2>
+    <form id="userForm" autocomplete="on">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" autocomplete="name" style="text-transform: capitalize;" required aria-required="true">
+
+      <label for="dob">Date of Birth:</label>
+      <input type="date" id="dob" name="dob" required aria-required="true">
+
+      <button type="submit" aria-label="Submit Form">Submit</button>
+    </form>
+    <div id="message" role="status" aria-live="polite"></div>
+  </div>
+
+  <script>
+    // Form submission handler
+    document.getElementById('userForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const name = document.getElementById('name').value.trim();
+      const dobRaw = document.getElementById('dob').value;
+
+      if (!name || !dobRaw) return;
+
+      // Redirect to the second page
+      window.location.href = "gender.html"; // Redirect to gender selection page
+    });
+  </script>
+
+</body>
+</html>

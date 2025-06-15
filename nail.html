@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Nail Care 💅</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive;
+      background: linear-gradient(to right, #ffd6e8, #ffeaf6);
+      color: #d63384;
+      padding: 40px;
+    }
+    h2 {
+      text-align: center;
+      color: #ff69b4;
+    }
+    .question {
+      margin: 20px 0 10px;
+      font-size: 18px;
+    }
+    .options {
+      margin-left: 20px;
+    }
+    .options label {
+      display: block;
+      margin-bottom: 8px;
+    }
+    input[type="radio"] {
+      transform: scale(1.3);
+      margin-right: 10px;
+    }
+    #result {
+      margin-top: 30px;
+      padding: 20px;
+      background: #fff0f5;
+      border-radius: 10px;
+      font-size: 18px;
+      color: #c2185b;
+    }
+    .button-group {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 30px;
+    }
+    .button-group button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #ff69b4;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h2>💅 Nail Care Questions</h2>
+  <form id="nailForm">
+    <div class="question">1. How would you describe your nails?</div>
+    <div class="options">
+      <label><input type="radio" name="nails" value="Healthy"> Strong and smooth</label>
+      <label><input type="radio" name="nails" value="Brittle"> Break easily</label>
+      <label><input type="radio" name="nails" value="Discolored"> Yellowish or discolored</label>
+      <label><input type="radio" name="nails" value="Biting"> I bite them</label>
+    </div>
+
+    <div class="question">2. Do you take care of your nails?</div>
+    <div class="options">
+      <label><input type="radio" name="care" value="Regular"> Yes, regularly</label>
+      <label><input type="radio" name="care" value="Occasionally"> Occasionally</label>
+      <label><input type="radio" name="care" value="Rarely"> Rarely</label>
+      <label><input type="radio" name="care" value="Never"> Never</label>
+    </div>
+
+    <div class="question">3. Do your nails grow quickly?</div>
+    <div class="options">
+      <label><input type="radio" name="growth" value="Fast"> Yes</label>
+      <label><input type="radio" name="growth" value="Slow"> Slowly</label>
+      <label><input type="radio" name="growth" value="Unsure"> I’m not sure</label>
+      <label><input type="radio" name="growth" value="Break"> They often break</label>
+    </div>
+
+    <div class="button-group">
+      <button type="button" onclick="generateNailResult()">Submit</button>
+      <button type="button" onclick="location.href='nailcare_recommendations.html'">View Recommendations</button>
+      <button type="button" onclick="location.href='nailcare_products.html'">Suggested Products</button>
+    </div>
+  </form>
+
+  <div id="result"></div>
+
+  <script>
+    function generateNailResult() {
+      const form = document.forms['nailForm'];
+      const nails = form['nails'].value;
+      let resultText = `<strong>Nail Condition:</strong> ${nails}<br><br>`;
+      resultText += "<strong>Tip:</strong> ";
+      if (nails === "Brittle") {
+        resultText += "Use strengthening oils and avoid harsh nail products.";
+      } else if (nails === "Discolored") {
+        resultText += "Consider antifungal treatments and avoid staining polishes.";
+      } else if (nails === "Biting") {
+        resultText += "Try bitter-tasting nail polish or stress-relieving habits.";
+      } else {
+        resultText += "Maintain regular trimming and moisturizing for healthy growth.";
+      }
+      document.getElementById("result").innerHTML = resultText;
+    }
+  </script>
+</body>
+</html>

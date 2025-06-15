@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Select Category 💖</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive;
+      background: linear-gradient(to right, #ffd6e8, #ffeaf6);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    h2 {
+      color: #ff69b4;
+      margin-bottom: 30px;
+    }
+
+    .btn {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 16px;
+      font-size: 18px;
+      margin: 10px;
+      cursor: pointer;
+      box-shadow: 3px 5px #888;
+      transition: transform 0.2s ease, background-color 0.3s ease;
+      width: 200px;
+    }
+
+    .btn:hover {
+      background-color: #0056b3;
+      transform: scale(1.05);
+    }
+
+    .category-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .emoji {
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h2>✨ Choose Your Skincare Focus ✨</h2>
+  <div class="category-container">
+    <button class="btn" onclick="goToPage('face')">🧼 Face</button>
+    <button class="btn" onclick="goToPage('body')">🛁 Body</button>
+    <button class="btn" onclick="goToPage('hair')">💇‍♀️ Hair</button>
+    <button class="btn" onclick="goToPage('nail')">💅 Nails</button>
+  </div>
+
+  <script>
+    function goToPage(category) {
+      window.location.href = `${category}.html`;  // Redirects to face.html, body.html, etc.
+    }
+  </script>
+</body>
+</html>

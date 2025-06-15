@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Face Care 🧖‍♀️</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive;
+      background: linear-gradient(to right, #ffd6e8, #ffeaf6);
+      color: #d63384;
+      padding: 20px;
+      margin: 0;
+    }
+
+    h2 {
+      text-align: center;
+      color: #ff69b4;
+    }
+
+    .question {
+      margin-bottom: 20px;
+      font-size: 18px;
+    }
+
+    .options label {
+      display: block;
+      margin-left: 20px;
+      font-size: 16px;
+    }
+
+    input[type="radio"] {
+      transform: scale(1.3);
+      margin-right: 8px;
+    }
+
+    #result {
+      margin-top: 30px;
+      padding: 20px;
+      background: #fff0f5;
+      border-radius: 10px;
+      font-size: 18px;
+      color: #c2185b;
+    }
+
+    @media (max-width: 600px) {
+      .question {
+        font-size: 16px;
+      }
+      .options label {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h2>🧴 Face Care Questions</h2>
+  <form id="faceForm">
+    <div id="questions-container"></div>
+
+    <div style="text-align: center; margin-top: 30px;">
+      <button type="button" onclick="generateFaceResult()" style="padding: 10px 20px; font-size: 16px; background-color: #ff69b4; color: white; border: none; border-radius: 8px; cursor: pointer;">Result</button>
+    
+      <button type="button" onclick="window.location.href='facecare_recommendations.html'" style="padding: 10px 20px; font-size: 16px; background-color: #f06292; color: white; border: none; border-radius: 8px; cursor: pointer;">View Recommendations</button>
+    
+      <button type="button" onclick="window.location.href='facecare_products.html'" style="padding: 10px 20px; font-size: 16px; background-color: #ec407a; color: white; border: none; border-radius: 8px; cursor: pointer;">Suggested Products</button>
+    </div>
+  </form>
+
+  <div id="result"></div>
+
+  <script>
+    const questions = [
+      {
+        q: "How does your skin feel by the end of the day?",
+        options: ["Oily and shiny", "Tight or dry", "Balanced", "Oily in T-zone", "Itchy or red"]
+      },
+      {
+        q: "How often do you get breakouts?",
+        options: ["Very often", "Rarely", "During periods", "After products", "Never"]
+      },
+      {
+        q: "How does your skin react to new skincare products?",
+        options: ["No reaction", "Breaks out", "Redness or burning", "Gets dry", "Feels smooth"]
+      },
+      {
+        q: "What does your skin look like after washing?",
+        options: ["Feels oily", "Feels dry or flaky", "No major change", "Looks red", "T-zone oily"]
+      },
+      {
+        q: "Do you notice dry patches or flaky areas?",
+        options: ["Frequently", "Occasionally", "Only in winter", "Never", "Only on cheeks"]
+      },
+      {
+        q: "Does your face feel oily a few hours after cleansing?",
+        options: ["Yes, entire face", "Only T-zone", "No", "Forehead only", "Just a bit"]
+      },
+      {
+        q: "Do you get redness or irritation easily?",
+        options: ["Yes, with many products", "Only sometimes", "No", "Only with strong products", "Frequently"]
+      },
+      {
+        q: "Do you get acne around your period or when stressed?",
+        options: ["Always", "Sometimes", "Never", "Only near chin", "Only with oily food"]
+      },
+      {
+        q: "How do acne treatments affect your skin?",
+        options: ["Dry it out", "No effect", "Redness", "Peels", "Works well"]
+      },
+      {
+        q: "Do you experience clogged pores or blackheads often?",
+        options: ["Yes", "Only nose", "Rarely", "Sometimes", "Not at all"]
+      },
+      {
+        q: "How does your skin feel after using an acne spot treatment?",
+        options: ["Stings or burns", "No reaction", "Dries out skin", "Improves skin", "Peels slightly"]
+      }
+    ];
+
+    const container = document.getElementById("questions-container");
+
+    questions.forEach((item, index) => {
+      const div = document.createElement("div");
+      div.className = "question";
+      div.innerHTML = `<strong>${index + 1}. ${item.q}</strong>`;
+
+      const optDiv = document.createElement("div");
+      optDiv.className = "options";
+
+      item.options.forEach(opt => {
+        const label = document.createElement("label");
+        const radio = document.createElement("input");
+        radio.type = "radio";
+        radio.name = `q${index}`;
+        radio.value = opt;
+        label.appendChild(radio);
+        label.appendChild(document.createTextNode(opt));
+        optDiv.appendChild(label);
+      });
+
+      div.appendChild(optDiv);
+      container.appendChild(div);
+    });
+
+    function generateFaceResult() {
+      const form = document.forms['faceForm'];
+      const allAnswers = [];
+
+      for (let i = 0; i < questions.length; i++) {
+        const selected = form.querySelector(`input[name="q${i}"]:checked`);
+        if (selected) allAnswers.push(selected.value.toLowerCase());
+      }
+
+      if (allAnswers.length === 0) {
+        document.getElementById("result").innerHTML = "Please select at least one option!";
+        return;
+      }
+
+      const scores = {
+        oily: 0,
+        dry: 0,
+        combination: 0,
+        normal: 0,
+        sensitive: 0
+      };
+
+      allAnswers.forEach(ans => {
+        if (ans.includes("oily")) scores.oily++;
+        if (ans.includes("shiny")) scores.oily++;
+        if (ans.includes("tight") || ans.includes("dry") || ans.includes("flaky")) scores.dry++;
+        if (ans.includes("balanced") || ans.includes("no major change")) scores.normal++;
+        if (ans.includes("t-zone") || ans.includes("only t-zone")) scores.combination++;
+        if (ans.includes("red") || ans.includes("burning") || ans.includes("stings") || ans.includes("peels") || ans.includes("irritation")) scores.sensitive++;
+      });
+
+      const skinType = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
+
+      let recommendation = "";
+      switch(skinType) {
+        case "oily":
+          recommendation = "🧼 Use gel-based or foaming cleansers.<br>🧖‍♀️ Try clay masks for oil control.<br>💧 Go for oil-free moisturizers.";
+          break;
+        case "dry":
+          recommendation = "🧴 Use cream-based, hydrating cleansers.<br>💦 Look for moisturizers with hyaluronic acid or ceramides.<br>🚫 Avoid harsh exfoliants.";
+          break;
+        case "combination":
+          recommendation = "🌿 Use a balancing toner.<br>💧 Apply lightweight moisturizers on oily areas and rich creams on dry patches.<br>🔁 Exfoliate 1–2 times a week.";
+          break;
+        case "normal":
+          recommendation = "🌸 Stick to a gentle cleanser and light moisturizer.<br>🧴 Maintain skin with SPF and hydrating serums.<br>🔄 Avoid over-cleansing.";
+          break;
+        case "sensitive":
+          recommendation = "🚫 Use fragrance-free products.<br>🌱 Look for calming ingredients like aloe, centella, or oat.<br>✅ Always patch test new products.";
+          break;
+      }
+
+      document.getElementById("result").innerHTML = `
+        <strong>Skin Type:</strong> ${skinType.charAt(0).toUpperCase() + skinType.slice(1)}<br><br>
+        <strong>Recommendation:</strong><br>${recommendation}
+      `;
+    }
+  </script>
+</body>
+</html>

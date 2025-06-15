@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hair Care 💇‍♀️</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive;
+      background: linear-gradient(to right, #ffd6e8, #ffeaf6);
+      color: #d63384;
+      padding: 40px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #ff69b4;
+    }
+
+    .question {
+      margin: 20px 0 10px;
+      font-size: 18px;
+    }
+
+    .options {
+      margin-left: 20px;
+    }
+
+    .options label {
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    input[type="radio"] {
+      transform: scale(1.3);
+      margin-right: 10px;
+    }
+
+    .button-group {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .button-group button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #ff69b4;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin: 5px;
+    }
+
+    .button-group button:nth-child(2) {
+      background-color: #f06292;
+    }
+
+    .button-group button:nth-child(3) {
+      background-color: #ec407a;
+    }
+
+    #result {
+      margin-top: 30px;
+      padding: 20px;
+      background: #fff0f5;
+      border-radius: 10px;
+      font-size: 18px;
+      color: #7b1fa2;
+    }
+  </style>
+</head>
+<body>
+  <h2>💇‍♀️ Hair Care Questions</h2>
+
+  <form name="hairForm" onsubmit="generateHairResult(event)">
+    <div class="question">1. How would you describe your hair texture?</div>
+    <div class="options">
+      <label><input type="radio" name="texture" value="Straight"> Fine and straight → Straight</label>
+      <label><input type="radio" name="texture" value="Wavy"> Wavy → Wavy</label>
+      <label><input type="radio" name="texture" value="Curly"> Curly or coily → Curly</label>
+      <label><input type="radio" name="texture" value="Frizzy"> Frizzy and unmanageable → Frizzy</label>
+    </div>
+
+    <div class="question">2. How does your scalp feel a day after washing?</div>
+    <div class="options">
+      <label><input type="radio" name="scalp" value="Dry"> Itchy/dry → Dry Scalp</label>
+      <label><input type="radio" name="scalp" value="Oily"> Greasy → Oily Scalp</label>
+      <label><input type="radio" name="scalp" value="Balanced"> Normal → Balanced</label>
+      <label><input type="radio" name="scalp" value="Dandruff-prone"> Flaky or irritated → Dandruff-prone</label>
+    </div>
+
+    <div class="question">3. What’s your main hair concern?</div>
+    <div class="options">
+      <label><input type="radio" name="concern" value="Hair fall"> Hair fall → Hair Fall</label>
+      <label><input type="radio" name="concern" value="Frizz"> Frizz or dryness → Frizz</label>
+      <label><input type="radio" name="concern" value="Dandruff"> Dandruff → Dandruff</label>
+      <label><input type="radio" name="concern" value="Damage"> Split ends or breakage → Damage</label>
+    </div>
+
+    <div class="question">4. How often do you oil your hair?</div>
+    <div class="options">
+      <label><input type="radio" name="oiling" value="Regularly"> Regularly (1–2x/week)</label>
+      <label><input type="radio" name="oiling" value="Sometimes"> Sometimes</label>
+      <label><input type="radio" name="oiling" value="Rarely"> Rarely</label>
+      <label><input type="radio" name="oiling" value="Never"> Never</label>
+    </div>
+
+    <div class="question">5. Do you heat style your hair (straighteners, dryers)?</div>
+    <div class="options">
+      <label><input type="radio" name="heat" value="Frequently"> Frequently</label>
+      <label><input type="radio" name="heat" value="Occasionally"> Occasionally</label>
+      <label><input type="radio" name="heat" value="Rarely"> Rarely</label>
+      <label><input type="radio" name="heat" value="Never"> Never</label>
+    </div>
+
+    <div class="button-group">
+      <button type="submit">Submit</button>
+      <button type="button" onclick="window.location.href='haircare_recommendations.html'">View Recommendations</button>
+      <button type="button" onclick="window.location.href='haircare_products.html'">Suggested Products</button>
+    </div>
+  </form>
+
+  <div id="result"></div>
+
+  <script>
+    function generateHairResult(event) {
+      event.preventDefault();
+
+      const form = document.forms['hairForm'];
+      const texture = form['texture'].value;
+      const scalp = form['scalp'].value;
+      const concern = form['concern'].value;
+
+      let resultText = `<strong>Hair Texture:</strong> ${texture}<br><strong>Scalp Feel:</strong> ${scalp}<br><strong>Concern:</strong> ${concern}<br><br>`;
+
+      resultText += "<strong>Tip:</strong> ";
+      if (concern === "Hair fall") {
+        resultText += "Use a strengthening shampoo, reduce heat styling, and try oil massages.";
+      } else if (concern === "Frizz") {
+        resultText += "Deep condition regularly and use leave-in serums to tame frizz.";
+      } else if (concern === "Dandruff") {
+        resultText += "Use anti-dandruff shampoos and avoid heavy oils on the scalp.";
+      } else {
+        resultText += "Trim hair regularly and use nourishing hair masks.";
+      }
+
+      document.getElementById("result").innerHTML = resultText;
+    }
+  </script>
+</body>
+</html>
